@@ -14,7 +14,18 @@ Output: False
 
 def has_duplicates(product_ids):
     # Your implementation here
-    pass
+    #Using a set is better because it only stores unique values and allows fast lookups.
+    #We check each ID and use add() to track the values. 
+    #Both lookup and add are O(1), which makes the overall runtime O(n).
+    seen = set()
+
+    for product_id in product_ids:
+        if product_id in seen:
+            return True
+        seen.add(product_id)
+
+    return False
+
 
 
 """
@@ -33,13 +44,21 @@ task_queue.remove_oldest_task() → "Email follow-up"
 class TaskQueue:
     def __init__(self):
         # Your initialization here
-        pass
+        #A list works as a simple queue to store tasks in order.
+        self.tasks = []
 
     def add_task(self, task):
-        pass
+        #Adds the new task to the end of the list. It takes around O(1) time on average.
+        self.tasks.append(task)
 
     def remove_oldest_task(self):
-        pass
+        #Removing something from the front of the list requires other items to shift,
+        #This operation is O(n).
+        if len(self.tasks) == 0:
+            return None
+
+        return self.tasks.pop(0)
+
 
 
 """
@@ -57,10 +76,13 @@ tracker.get_unique_count() → 2
 
 class UniqueTracker:
     def __init__(self):
-        pass
+        #A set is better because it automatically keeps only the unique values.
+        self.values = set()
 
     def add(self, value):
-        pass
+        #Adds a new value to a set and is O(1) on average.
+        self.values.add(value)
 
     def get_unique_count(self):
-        pass
+        #To get the size of a set is O(1).
+        return len(self.values)
